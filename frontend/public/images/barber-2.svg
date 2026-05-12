@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a2a2a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="skinGradient1" cx="50%" cy="40%">
+      <stop offset="0%" style="stop-color:#f4c4a0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4a574;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="500" fill="url(#bgGradient1)"/>
+  
+  <!-- Shirt/Uniform base - MUCH LARGER -->
+  <rect x="20" y="180" width="360" height="320" fill="#1F4788" />
+  
+  <!-- Shirt collar -->
+  <polygon points="120,180 280,180 270,205 130,205" fill="#4A7BA7"/>
+  
+  <!-- Shirt buttons - larger -->
+  <circle cx="200" cy="230" r="8" fill="#4A7BA7" />
+  <circle cx="200" cy="290" r="8" fill="#4A7BA7" />
+  <circle cx="200" cy="350" r="8" fill="#4A7BA7" />
+  
+  <!-- Head - MUCH LARGER -->
+  <circle cx="200" cy="100" r="85" fill="url(#skinGradient1)" />
+  
+  <!-- Hair -->
+  <path d="M 115 100 Q 115 20 200 15 Q 285 20 285 100 Q 285 30 200 10 Q 125 20 115 100" fill="#1a1a1a" />
+  
+  <!-- Hair texture lines -->
+  <line x1="150" y1="35" x2="145" y2="60" stroke="#0a0a0a" stroke-width="2.5" opacity="0.5" />
+  <line x1="200" y1="15" x2="200" y2="50" stroke="#0a0a0a" stroke-width="2.5" opacity="0.5" />
+  <line x1="250" y1="40" x2="255" y2="65" stroke="#0a0a0a" stroke-width="2.5" opacity="0.5" />
+  
+  <!-- Face outline -->
+  <circle cx="200" cy="100" r="85" fill="none" stroke="#4A7BA7" stroke-width="2" opacity="0.3" />
+  
+  <!-- Eyes - larger -->
+  <circle cx="170" cy="85" r="8" fill="#2a2a2a" />
+  <circle cx="230" cy="85" r="8" fill="#2a2a2a" />
+  <circle cx="172" cy="82" r="2.5" fill="#ffffff" opacity="0.6" />
+  <circle cx="232" cy="82" r="2.5" fill="#ffffff" opacity="0.6" />
+  
+  <!-- Eyebrows - larger -->
+  <line x1="150" y1="68" x2="190" y2="64" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+  <line x1="210" y1="64" x2="250" y2="68" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Nose -->
+  <line x1="200" y1="95" x2="200" y2="130" stroke="#d4a574" stroke-width="2.5" />
+  <circle cx="188" cy="135" r="2.5" fill="#d4a574" />
+  <circle cx="212" cy="135" r="2.5" fill="#d4a574" />
+  
+  <!-- Beard/facial hair - larger -->
+  <ellipse cx="200" cy="150" rx="60" ry="38" fill="#3a3a3a" opacity="0.7" />
+  <path d="M 145 140 Q 145 165 200 172 Q 255 165 255 140" fill="#4a4a4a" />
+  
+  <!-- Mouth -->
+  <path d="M 175 150 Q 200 165 225 150" stroke="#8B6B5C" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  
+  <!-- Name badge area -->
+  <rect x="85" y="410" width="230" height="75" fill="#4A7BA7" rx="10" />
+  <text x="200" y="460" font-size="56" font-weight="bold" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif">D</text>
+</svg>
