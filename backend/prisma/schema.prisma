@@ -1,0 +1,114 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String      @id @default(cuid())
+  name            String
+  email           String      @unique
+  password        String
+  role            Role        @default(CUSTOMER)
+
+  // Barber profile fields
+  specialty       String?     // for BARBER role
+  bio             String?     // Barber bio
+  photoUrl        String?     // Barber profile photo
+  rating          Float       @default(5.0) // Average rating
+  ratingCount     Int         @default(0)  // Number of ratings
+
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  appointments        Appointment[]     @relation("CustomerAppointments")
+  barberAppointments  Appointment[]     @relation("BarberAppointments")
+  reviews             Review[]          @relation("CustomerReviews")
+  receivedReviews     Review[]          @relation("BarberReviews")
+
+  @@map("users")
+}
+
+model Service {
+  id            String      @id @default(cuid())
+  name          String      @unique
+  description   String?
+  price         Int         // in cents (e.g., 3000 = $30)
+  duration      Int         @default(30) // in minutes
+  icon          String?     // emoji or icon name
+  createdAt     DateTime    @default(now())
+
+  @@map("services")
+}
+
+model Appointment {
+  id                    String      @id @default(cuid())
+  date                  DateTime
+  duration              Int         @default(30) // in minutes
+  service               String      @default("Haircut")
+  customer              User        @relation("CustomerAppointments", fields: [customerId], references: [id], onDelete: Cascade)
+  customerId            String
+  barber                User        @relation("BarberAppointments", fields: [barberId], references: [id], onDelete: Restrict)
+  barberId              String
+  status                AppointmentStatus @default(PENDING)
+  notes                 String?
+
+  // Tracking
+  confirmationSent      Boolean     @default(false)
+  reminderSent          Boolean     @default(false)
+  completedAt           DateTime?
+
+  // Review
+  review                Review?
+
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+
+  // Unique constraint to prevent double booking
+  @@unique([barberId, date])
+  @@index([customerId])
+  @@index([barberId])
+  @@index([date])
+  @@map("appointments")
+}
+
+model Review {
+  id            String      @id @default(cuid())
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  appointmentId String      @unique
+  customer      User        @relation("CustomerReviews", fields: [customerId], references: [id], onDelete: Cascade)
+  customerId    String
+  barber        User        @relation("BarberReviews", fields: [barberId], references: [id], onDelete: Cascade)
+  barberId      String
+
+  rating        Int         @default(5) // 1-5 stars
+  title         String?
+  comment       String?
+
+  createdAt     DateTime    @default(now())
+
+  @@index([barberId])
+  @@index([customerId])
+  @@map("reviews")
+}
+
+enum Role {
+  CUSTOMER
+  BARBER
+  ADMIN
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
